@@ -1,0 +1,56 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#searchbar, #searchbar-toggle {
+    transition: all 0.25s ease-out;
+    z-index: 1;
+}
+
+#searchbar-toggle {
+    position: absolute;
+    right: -15px;
+    top: 40px;
+    color: #00A0B1;
+}
+
+    #searchbar-toggle.active {
+        right: -40px;
+        color: #008299;
+    }
+
+#searchbar {
+    position: absolute;
+    right: -110px;
+    top: 90px;
+    height: auto;
+    width: 100px;
+    margin: 15px 0;
+    padding: 0;
+    background: #008299;
+    border-radius: 10px 0 0 10px;
+    list-style: none;
+    text-align: center;
+    box-shadow: black 0 0 5px 1px;
+}
+
+    #searchbar.active {
+        right: -10px;
+    }
+
+
+    #searchbar li {
+        padding: 12px;
+    }
+
+    #searchbar a {
+        color: white;
+    }
+
+.angular-google-map-container {
+    height: 100%;
+}

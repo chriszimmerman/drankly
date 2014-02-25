@@ -1,0 +1,38 @@
+﻿<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Drankly</title>
+    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+
+    <script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    <script src="lib/underscore/underscore-min.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular/angular-google-maps.min.js"></script>
+    <script src="lib/angular/angularjs-google-places.min.js"></script>
+    <script src="lib/angular/angularjs-geolocation.min.js"></script>
+    <script src="lib/live/live.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+</head>
+<body ng-app="drankly">
+    <div ng-controller="SearchCtrl">
+        <a href="#" id="searchbar-toggle"
+           ng-class="{active: isActive}"
+           ng-click="toggleActive()">
+            <i class="fa fa-4x fa-bars"></i>
+        </a>
+        <ul id="searchbar" ng-class="{active: isActive}">
+            <li><a ng-click="reset()" href="#"><i class="fa fa-3x fa-refresh"></i></a></li>
+            <li><a ng-click="findBars()" href="#"><i class="fa fa-3x fa-glass"></i></a></li>
+        </ul>
+    </div>
+
+    <div ng-controller="MapCtrl" ng-init="setCenter()">
+        <google-map center="map.center" zoom="map.zoom">
+            <markers models="map.markers" coords="'self'"></markers>
+        </google-map>
+    </div>
+</body>
+</html>
