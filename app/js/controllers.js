@@ -47,6 +47,7 @@
                 latitude: $scope.map.center.latitude,
                 longitude: $scope.map.center.longitude,
                 radius: 1000,
+                openNow: true,
                 types: ["bar"],
             }).then(function (places) {
                 $scope.map.markers = [];
