@@ -4,17 +4,6 @@
     <title>Drankly</title>
     <link href="app/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="app/css/app.css" rel="stylesheet" />
-
-    <script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
-    <script src="app/lib/underscore/underscore-min.js"></script>
-    <script src="app/lib/angular/angular.min.js"></script>
-    <script src="app/lib/angular/angular-google-maps.min.js"></script>
-    <script src="app/lib/angular/angularjs-google-places.min.js"></script>
-    <script src="app/lib/angular/angularjs-geolocation.min.js"></script>
-    <script src="app/lib/live/live.js"></script>
-
-    <script src="app/js/app.js"></script>
-    <script src="app/js/controllers.js"></script>
 </head>
 <body ng-app="drankly">
     <div ng-controller="SearchCtrl">
@@ -30,9 +19,20 @@
     </div>
 
     <div ng-controller="MapCtrl" ng-init="setCenter()">
-        <google-map center="map.center" zoom="map.zoom">
+        <google-map center="map.center" zoom="map.zoom" draggable="true">
             <markers models="map.markers" coords="'self'"></markers>
         </google-map>
     </div>
+
+    <script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    <script src="app/lib/underscore/underscore-min.js"></script>
+    <script src="app/lib/angular/angular.min.js"></script>
+    <script src="app/lib/angular/angular-google-maps.min.js"></script>
+    <script src="app/lib/angular/angularjs-google-places.min.js"></script>
+    <script src="app/lib/angular/angularjs-geolocation.min.js"></script>
+    <script src="app/lib/live/live.js"></script>
+
+    <script src="app/js/app.js"></script>
+    <script src="app/js/controllers.js"></script>
 </body>
 </html>
