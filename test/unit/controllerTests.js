@@ -168,7 +168,8 @@
                     latitude: 1,
                     longitude: 2,
                     radius: 1000,
-                    types: ["bar"]
+                    types: ["bar"],
+                    openNow: true
                 });
             });
 
