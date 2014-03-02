@@ -7,14 +7,9 @@
 </head>
 <body ng-app="drankly">
     <div ng-controller="SearchCtrl">
-        <a href="#" id="searchbar-toggle"
-           ng-class="{active: isActive}"
-           ng-click="toggleActive()">
-            <i class="fa fa-4x fa-bars"></i>
-        </a>
-        <ul id="searchbar" ng-class="{active: isActive}">
-            <li><a ng-click="reset()" href="#"><i class="fa fa-3x fa-refresh"></i></a></li>
-            <li><a ng-click="findBars()" href="#"><i class="fa fa-3x fa-glass"></i></a></li>
+        <ul id="searchbar">
+            <li><a ng-click="reset()" href="#"><i class="fa fa-2x fa-refresh"></i></a></li>
+            <li><a ng-click="findBars()" href="#"><i class="fa fa-2x fa-glass"></i></a></li>
         </ul>
     </div>
 

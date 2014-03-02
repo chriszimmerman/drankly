@@ -1,4 +1,4 @@
-﻿describe("Controller Tests", function () {
+describe("Controller Tests", function () {
     beforeEach(module("drankly.controllers"));
 
     describe("SearchCtrl", function () {
@@ -9,35 +9,6 @@
             scope = rootScope.$new();
             $controller("SearchCtrl", { $scope: scope, $rootScope: rootScope });
         }));
-
-        describe("when initialized", function () {
-            it("should default isActive to false", function () {
-                expect(scope.isActive).toBeFalsy();
-            });
-        });
-
-        describe("when toggleActive", function () {
-            describe("and when isActive is false", function () {
-                beforeEach(function () {
-                    scope.toggleActive();
-                });
-
-                it("should set isActive to true", function () {
-                    expect(scope.isActive).toBeTruthy();
-                });
-            });
-
-            describe("and when isActive is true", function () {
-                beforeEach(function () {
-                    scope.isActive = true;
-                    scope.toggleActive();
-                });
-
-                it("should set isActive to false", function () {
-                    expect(scope.isActive).toBeFalsy();
-                });
-            });
-        });
 
         describe("when findBars", function () {
             beforeEach(function () {

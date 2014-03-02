@@ -1,10 +1,5 @@
 ﻿angular.module("drankly.controllers", [])
     .controller("SearchCtrl", function ($scope, $rootScope) {
-        $scope.isActive = false;
-        $scope.toggleActive = function () {
-            $scope.isActive = !$scope.isActive;
-        };
-
         $scope.findBars = function () {
             $rootScope.$broadcast("findBars");
         };
