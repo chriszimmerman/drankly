@@ -20,6 +20,17 @@ describe("Controller Tests", function () {
                 expect(rootScope.$broadcast).toHaveBeenCalledWith("findBars");
             });
         });
+		
+		describe("when findAtm", function () {
+            beforeEach(function () {
+                spyOn(rootScope, "$broadcast");
+                scope.findAtm();
+            });
+
+            it("should broadcast findAtm", function () {
+                expect(rootScope.$broadcast).toHaveBeenCalledWith("findAtm");
+            });
+        });
 
         describe("when reset", function() {
             beforeEach(function() {
@@ -140,6 +151,56 @@ describe("Controller Tests", function () {
                     longitude: 2,
                     radius: 1000,
                     types: ["bar"],
+                    openNow: true
+                });
+            });
+
+            it("should remove old markers", function () {
+                expect(scope.map.markers).not.toContain({
+                    latitude: 98,
+                    longitude: 99
+                });
+            });
+
+            it("should set new markers", function () {
+                expect(scope.map.markers).toContain({ latitude: 1, longitude: 2 });
+                expect(scope.map.markers).toContain({ latitude: 4, longitude: 5 });
+            });
+        });
+		
+		describe("when findAtm", function () {
+            beforeEach(inject(function ($rootScope) {
+                scope.map = {
+                    center: {
+                        latitude: 1,
+                        longitude: 2
+                    },
+                    markers: [
+                        { latitude: 1, longitude: 2 },
+                        { latitude: 98, longitude: 99 }
+                    ]
+                };
+
+                spyOn(googlePlaces, "nearbySearch").and.callThrough();
+                $rootScope.$broadcast("findAtm");
+
+                googlePlacesDeferred.resolve([{
+                    geometry: {
+                        location: {
+                            d: 4,
+                            e: 5
+                        }
+                    }
+                }]);
+                $rootScope.$digest();
+            }));
+
+            it("should search for atm", function () {
+                expect(googlePlaces.nearbySearch).toHaveBeenCalledWith({
+                    latitude: 1,
+                    longitude: 2,
+                    radius: 1000,
+                    types: ["atm"],
                     openNow: true
                 });
             });

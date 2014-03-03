@@ -4,6 +4,10 @@
             $rootScope.$broadcast("findBars");
         };
 
+        $scope.findAtm = function () {
+            $rootScope.$broadcast("findAtm");
+        };
+
         $scope.reset = function () {
             $rootScope.$broadcast("reset");
         };
@@ -44,6 +48,26 @@
                 radius: 1000,
                 openNow: true,
                 types: ["bar"],
+            }).then(function (places) {
+                $scope.map.markers = [];
+                $scope.map.markers.push($scope.map.center);
+
+                for (var i = 0; i < places.length; i++) {
+                    $scope.map.markers.push({
+                        latitude: places[i].geometry.location.d,
+                        longitude: places[i].geometry.location.e
+                    });
+                }
+            });
+        });
+
+        $rootScope.$on("findAtm", function () {
+            ngGPlacesAPI.nearbySearch({
+                latitude: $scope.map.center.latitude,
+                longitude: $scope.map.center.longitude,
+                radius: 1000,
+                openNow: true,
+                types: ["atm"],
             }).then(function (places) {
                 $scope.map.markers = [];
                 $scope.map.markers.push($scope.map.center);
