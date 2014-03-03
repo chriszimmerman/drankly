@@ -1,221 +1,253 @@
-describe("Controller Tests", function () {
-    beforeEach(module("drankly.controllers"));
+describe('Controller Tests', function() {
+	beforeEach(module('drankly.controllers'));
 
-    describe("SearchCtrl", function () {
-        var scope, rootScope;
+	describe('SearchCtrl', function() {
+		var scope, rootScope;
 
-        beforeEach(inject(function ($rootScope, $controller) {
-            rootScope = $rootScope;
-            scope = rootScope.$new();
-            $controller("SearchCtrl", { $scope: scope, $rootScope: rootScope });
-        }));
+		beforeEach(inject(function($rootScope, $controller) {
+			rootScope = $rootScope;
+			scope = rootScope.$new();
+			$controller('SearchCtrl', {
+				$scope: scope,
+				$rootScope: rootScope
+			});
+		}));
 
-        describe("when findBars", function () {
-            beforeEach(function () {
-                spyOn(rootScope, "$broadcast");
-                scope.findBars();
-            });
+		describe('when findBars', function() {
+			beforeEach(function() {
+				spyOn(rootScope, '$broadcast');
+				scope.findBars();
+			});
 
-            it("should broadcast findBars", function () {
-                expect(rootScope.$broadcast).toHaveBeenCalledWith("findBars");
-            });
-        });
-		
-		describe("when findAtm", function () {
-            beforeEach(function () {
-                spyOn(rootScope, "$broadcast");
-                scope.findAtm();
-            });
+			it('should broadcast findBars', function() {
+				expect(rootScope.$broadcast).toHaveBeenCalledWith('findBars');
+			});
+		});
 
-            it("should broadcast findAtm", function () {
-                expect(rootScope.$broadcast).toHaveBeenCalledWith("findAtm");
-            });
-        });
+		describe('when findAtm', function() {
+			beforeEach(function() {
+				spyOn(rootScope, '$broadcast');
+				scope.findAtm();
+			});
 
-        describe("when reset", function() {
-            beforeEach(function() {
-                spyOn(rootScope, "$broadcast");
-                scope.reset();
-            });
+			it('should broadcast findAtm', function() {
+				expect(rootScope.$broadcast).toHaveBeenCalledWith('findAtm');
+			});
+		});
 
-            it("should broadcast reset", function() {
-                expect(rootScope.$broadcast).toHaveBeenCalledWith("reset");
-            });
-        });
-    });
+		describe('when reset', function() {
+			beforeEach(function() {
+				spyOn(rootScope, '$broadcast');
+				scope.reset();
+			});
 
-    describe("MapCtrl", function () {
-        var scope, geolocation, googlePlaces,
-            geolocationDeferred, googlePlacesDeferred;
+			it('should broadcast reset', function() {
+				expect(rootScope.$broadcast).toHaveBeenCalledWith('reset');
+			});
+		});
+	});
 
-        beforeEach(inject(function ($rootScope, $controller, $q) {
-            scope = $rootScope.$new();
+	describe('MapCtrl', function() {
+		var scope, geolocation, googlePlaces,
+			geolocationDeferred, googlePlacesDeferred;
 
-            geolocation = {
-                getLocation: function () {
-                    geolocationDeferred = $q.defer();
-                    return geolocationDeferred.promise;
-                }
-            };
+		beforeEach(inject(function($rootScope, $controller, $q) {
+			scope = $rootScope.$new();
 
-            googlePlaces = {
-                nearbySearch: function () {
-                    googlePlacesDeferred = $q.defer();
-                    return googlePlacesDeferred.promise;
-                }
-            };
+			geolocation = {
+				getLocation: function() {
+					geolocationDeferred = $q.defer();
+					return geolocationDeferred.promise;
+				}
+			};
 
-            $controller("MapCtrl", {
-                $scope: scope,
-                geolocation: geolocation,
-                ngGPlacesAPI: googlePlaces
-            });
-        }));
+			googlePlaces = {
+				nearbySearch: function() {
+					googlePlacesDeferred = $q.defer();
+					return googlePlacesDeferred.promise;
+				}
+			};
 
-        describe("when initialized", function () {
-            it("should default map", function () {
-                expect(scope.map).toEqual({
-                    center: {
-                        longitude: 0,
-                        latitude: 0
-                    },
-                    zoom: 0,
-                    markers: []
-                });
-            });
-        });
+			$controller('MapCtrl', {
+				$scope: scope,
+				geolocation: geolocation,
+				ngGPlacesAPI: googlePlaces
+			});
+		}));
 
-        describe("when setCenter", function () {
-            beforeEach(inject(function ($rootScope) {
-                spyOn(geolocation, "getLocation").and.callThrough();
-                scope.setCenter();
+		describe('when initialized', function() {
+			it('should default map', function() {
+				expect(scope.map).toEqual({
+					center: {
+						longitude: 0,
+						latitude: 0
+					},
+					zoom: 0,
+					markers: []
+				});
+			});
+		});
 
-                geolocationDeferred.resolve({ coords: { latitude: 1, longitude: 2 } });
-                $rootScope.$digest();
-            }));
+		describe('when setCenter', function() {
+			beforeEach(inject(function($rootScope) {
+				spyOn(geolocation, 'getLocation').and.callThrough();
+				scope.setCenter();
 
-            it("should set the map center", function () {
-                expect(scope.map.center).toEqual({ latitude: 1, longitude: 2 });
-            });
+				geolocationDeferred.resolve({
+					coords: {
+						latitude: 1,
+						longitude: 2
+					}
+				});
+				$rootScope.$digest();
+			}));
 
-            it("should set the map zoom", function () {
-                expect(scope.map.zoom).toEqual(15);
-            });
+			it('should set the map center', function() {
+				expect(scope.map.center).toEqual({
+					latitude: 1,
+					longitude: 2
+				});
+			});
 
-            it("should set the markers", function () {
-                expect(scope.map.markers).toEqual([{ latitude: 1, longitude: 2 }]);
-            });
-        });
+			it('should set the map zoom', function() {
+				expect(scope.map.zoom).toEqual(15);
+			});
 
-        describe("when reset", function() {
-            beforeEach(inject(function ($rootScope) {
-                spyOn(scope, "setCenter");
-                $rootScope.$broadcast("reset");
-            }));
-            
-            it("should setCenter", function () {
-                expect(scope.setCenter).toHaveBeenCalled();
-            });
-        });
+			it('should set the markers', function() {
+				expect(scope.map.markers).toEqual([{
+					latitude: 1,
+					longitude: 2
+				}]);
+			});
+		});
 
-        describe("when findBars", function () {
-            beforeEach(inject(function ($rootScope) {
-                scope.map = {
-                    center: {
-                        latitude: 1,
-                        longitude: 2
-                    },
-                    markers: [
-                        { latitude: 1, longitude: 2 },
-                        { latitude: 98, longitude: 99 }
-                    ]
-                };
+		describe('when reset', function() {
+			beforeEach(inject(function($rootScope) {
+				spyOn(scope, 'setCenter');
+				$rootScope.$broadcast('reset');
+			}));
 
-                spyOn(googlePlaces, "nearbySearch").and.callThrough();
-                $rootScope.$broadcast("findBars");
+			it('should setCenter', function() {
+				expect(scope.setCenter).toHaveBeenCalled();
+			});
+		});
 
-                googlePlacesDeferred.resolve([{
-                    geometry: {
-                        location: {
-                            d: 4,
-                            e: 5
-                        }
-                    }
-                }]);
-                $rootScope.$digest();
-            }));
+		describe('when findBars', function() {
+			beforeEach(inject(function($rootScope) {
+				scope.map = {
+					center: {
+						latitude: 1,
+						longitude: 2
+					},
+					markers: [{
+						latitude: 1,
+						longitude: 2
+					}, {
+						latitude: 98,
+						longitude: 99
+					}]
+				};
 
-            it("should search for bars", function () {
-                expect(googlePlaces.nearbySearch).toHaveBeenCalledWith({
-                    latitude: 1,
-                    longitude: 2,
-                    radius: 1000,
-                    types: ["bar"],
-                    openNow: true
-                });
-            });
+				spyOn(googlePlaces, 'nearbySearch').and.callThrough();
+				$rootScope.$broadcast('findBars');
 
-            it("should remove old markers", function () {
-                expect(scope.map.markers).not.toContain({
-                    latitude: 98,
-                    longitude: 99
-                });
-            });
+				googlePlacesDeferred.resolve([{
+					geometry: {
+						location: {
+							d: 4,
+							e: 5
+						}
+					}
+				}]);
+				$rootScope.$digest();
+			}));
 
-            it("should set new markers", function () {
-                expect(scope.map.markers).toContain({ latitude: 1, longitude: 2 });
-                expect(scope.map.markers).toContain({ latitude: 4, longitude: 5 });
-            });
-        });
-		
-		describe("when findAtm", function () {
-            beforeEach(inject(function ($rootScope) {
-                scope.map = {
-                    center: {
-                        latitude: 1,
-                        longitude: 2
-                    },
-                    markers: [
-                        { latitude: 1, longitude: 2 },
-                        { latitude: 98, longitude: 99 }
-                    ]
-                };
+			it('should search for bars', function() {
+				expect(googlePlaces.nearbySearch).toHaveBeenCalledWith({
+					latitude: 1,
+					longitude: 2,
+					radius: 1000,
+					types: ['bar'],
+					openNow: true
+				});
+			});
 
-                spyOn(googlePlaces, "nearbySearch").and.callThrough();
-                $rootScope.$broadcast("findAtm");
+			it('should remove old markers', function() {
+				expect(scope.map.markers).not.toContain({
+					latitude: 98,
+					longitude: 99
+				});
+			});
 
-                googlePlacesDeferred.resolve([{
-                    geometry: {
-                        location: {
-                            d: 4,
-                            e: 5
-                        }
-                    }
-                }]);
-                $rootScope.$digest();
-            }));
+			it('should set new markers', function() {
+				expect(scope.map.markers).toContain({
+					latitude: 1,
+					longitude: 2
+				});
+				expect(scope.map.markers).toContain({
+					latitude: 4,
+					longitude: 5
+				});
+			});
+		});
 
-            it("should search for atm", function () {
-                expect(googlePlaces.nearbySearch).toHaveBeenCalledWith({
-                    latitude: 1,
-                    longitude: 2,
-                    radius: 1000,
-                    types: ["atm"],
-                    openNow: true
-                });
-            });
+		describe('when findAtm', function() {
+			beforeEach(inject(function($rootScope) {
+				scope.map = {
+					center: {
+						latitude: 1,
+						longitude: 2
+					},
+					markers: [{
+						latitude: 1,
+						longitude: 2
+					}, {
+						latitude: 98,
+						longitude: 99
+					}]
+				};
 
-            it("should remove old markers", function () {
-                expect(scope.map.markers).not.toContain({
-                    latitude: 98,
-                    longitude: 99
-                });
-            });
+				spyOn(googlePlaces, 'nearbySearch').and.callThrough();
+				$rootScope.$broadcast('findAtm');
 
-            it("should set new markers", function () {
-                expect(scope.map.markers).toContain({ latitude: 1, longitude: 2 });
-                expect(scope.map.markers).toContain({ latitude: 4, longitude: 5 });
-            });
-        });
-    });
+				googlePlacesDeferred.resolve([{
+					geometry: {
+						location: {
+							d: 4,
+							e: 5
+						}
+					}
+				}]);
+				$rootScope.$digest();
+			}));
+
+			it('should search for atm', function() {
+				expect(googlePlaces.nearbySearch).toHaveBeenCalledWith({
+					latitude: 1,
+					longitude: 2,
+					radius: 1000,
+					types: ['atm'],
+					openNow: true
+				});
+			});
+
+			it('should remove old markers', function() {
+				expect(scope.map.markers).not.toContain({
+					latitude: 98,
+					longitude: 99
+				});
+			});
+
+			it('should set new markers', function() {
+				expect(scope.map.markers).toContain({
+					latitude: 1,
+					longitude: 2
+				});
+				expect(scope.map.markers).toContain({
+					latitude: 4,
+					longitude: 5
+				});
+			});
+		});
+	});
 });

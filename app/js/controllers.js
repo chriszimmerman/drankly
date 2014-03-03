@@ -1,83 +1,73 @@
-﻿angular.module("drankly.controllers", [])
-    .controller("SearchCtrl", function ($scope, $rootScope) {
-        $scope.findBars = function () {
-            $rootScope.$broadcast("findBars");
-        };
+﻿var ctrls = angular.module('drankly.controllers', ['drankly.services']);
 
-        $scope.findAtm = function () {
-            $rootScope.$broadcast("findAtm");
-        };
+ctrls.controller('SearchCtrl', function($scope, $rootScope) {
+	$scope.findBars = function() {
+		$rootScope.$broadcast('findBars');
+	};
 
-        $scope.reset = function () {
-            $rootScope.$broadcast("reset");
-        };
-    })
+	$scope.findAtm = function() {
+		$rootScope.$broadcast('findAtm');
+	};
 
-    .controller("MapCtrl", function ($scope, $rootScope, geolocation, ngGPlacesAPI) {
-        $scope.map = {
-            center: { latitude: 0, longitude: 0 },
-            zoom: 0,
-            markers: []
-        };
+	$scope.reset = function() {
+		$rootScope.$broadcast('reset');
+	};
+});
 
-        $scope.setCenter = function () {
-            geolocation.getLocation().then(function (position) {
-                $scope.map = {
-                    zoom: 15,
-                    center: {
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude
-                    }
-                };
+ctrls.controller('MapCtrl', function($scope, $rootScope, geolocation, ngGPlacesAPI, MarkerSvc) {
+	$scope.map = {
+		center: {
+			latitude: 0,
+			longitude: 0
+		},
+		zoom: 0,
+		markers: []
+	};
 
-                $scope.map.markers = [{
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude
-                }];
-            });
-        };
+	$scope.setCenter = function() {
+		geolocation.getLocation().then(function(position) {
+			$scope.map = {
+				zoom: 15,
+				center: {
+					latitude: position.coords.latitude,
+					longitude: position.coords.longitude
+				}
+			};
 
-        $rootScope.$on("reset", function () {
-            $scope.setCenter();
-        });
+			$scope.map.markers = [{
+				latitude: position.coords.latitude,
+				longitude: position.coords.longitude
+			}];
+		});
+	};
 
-        $rootScope.$on("findBars", function () {
-            ngGPlacesAPI.nearbySearch({
-                latitude: $scope.map.center.latitude,
-                longitude: $scope.map.center.longitude,
-                radius: 1000,
-                openNow: true,
-                types: ["bar"],
-            }).then(function (places) {
-                $scope.map.markers = [];
-                $scope.map.markers.push($scope.map.center);
+	$rootScope.$on('reset', function() {
+		$scope.setCenter();
+	});
 
-                for (var i = 0; i < places.length; i++) {
-                    $scope.map.markers.push({
-                        latitude: places[i].geometry.location.d,
-                        longitude: places[i].geometry.location.e
-                    });
-                }
-            });
-        });
+	$rootScope.$on('findBars', function() {
+		ngGPlacesAPI.nearbySearch({
+			latitude: $scope.map.center.latitude,
+			longitude: $scope.map.center.longitude,
+			radius: 1000,
+			openNow: true,
+			types: ['bar'],
+		}).then(function(places) {
+			$scope.map.markers = MarkerSvc.createMarkers(places);
+			$scope.map.markers.push($scope.map.center);
+		});
+	});
 
-        $rootScope.$on("findAtm", function () {
-            ngGPlacesAPI.nearbySearch({
-                latitude: $scope.map.center.latitude,
-                longitude: $scope.map.center.longitude,
-                radius: 1000,
-                openNow: true,
-                types: ["atm"],
-            }).then(function (places) {
-                $scope.map.markers = [];
-                $scope.map.markers.push($scope.map.center);
-
-                for (var i = 0; i < places.length; i++) {
-                    $scope.map.markers.push({
-                        latitude: places[i].geometry.location.d,
-                        longitude: places[i].geometry.location.e
-                    });
-                }
-            });
-        });
-    });
+	$rootScope.$on('findAtm', function() {
+		ngGPlacesAPI.nearbySearch({
+			latitude: $scope.map.center.latitude,
+			longitude: $scope.map.center.longitude,
+			radius: 1000,
+			openNow: true,
+			types: ['atm'],
+		}).then(function(places) {
+			$scope.map.markers = MarkerSvc.createMarkers(places);
+			$scope.map.markers.push($scope.map.center);
+		})
+	});
+});
