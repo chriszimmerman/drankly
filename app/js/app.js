@@ -5,7 +5,8 @@ var app = angular.module("drankly", [
 	"geolocation",
 	"google-maps",
 	"ngGPlaces",
-	"drankly.controllers"
+	"drankly.controllers",
+	"drankly.services"
 ]);
 
 app.config(function(ngGPlacesAPIProvider) {
