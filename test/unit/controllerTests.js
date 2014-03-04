@@ -226,8 +226,7 @@ describe('Controller Tests', function() {
 					latitude: 1,
 					longitude: 2,
 					radius: 1000,
-					types: ['atm'],
-					openNow: true
+					types: ['atm']
 				});
 			});
 
