@@ -1,4 +1,4 @@
-describe('MarkerSvc', function() {
+describe('services/marker', function() {
 	var svc;
 
 	beforeEach(module('drankly.services'));
