@@ -38,4 +38,22 @@ describe('services/infoWindow', function() {
 			expect(result.rating).toEqual(1);
 		})
 	})
+
+	describe('when createInfoWindows', function() {
+		var places;
+		beforeEach(function() {
+			places = [{
+				a: 0
+			}, {
+				a: 1
+			}];
+			spyOn(svc, 'createInfoWindow');
+			svc.createInfoWindows(places);
+		})
+
+		it("should create each info window", function() {
+			expect(svc.createInfoWindow).toHaveBeenCalledWith(places[0]);
+			expect(svc.createInfoWindow).toHaveBeenCalledWith(places[1]);
+		})
+	})
 })

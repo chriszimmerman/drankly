@@ -10,6 +10,15 @@ app.factory('InfoWindowSvc', function() {
 				},
 				rating: place.rating
 			};
+		},
+		createInfoWindows: function(places) {
+			var infoWindows = [];
+
+			for (var i = 0; i < places.length; i++) {
+				infoWindows.push(this.createInfoWindow(places[i]));
+			};
+
+			return infoWindows;
 		}
 	};
 });
