@@ -1,8 +1,8 @@
 describe('controllers/map', function() {
-	var scope, geolocation, googlePlaces,
-		geolocationDeferred, googlePlacesDeferred;
+	var scope, geolocation, googlePlaces, geolocationDeferred, googlePlacesDeferred, fakeMarkerSvc;
 
 	beforeEach(module('drankly.controllers'));
+
 	beforeEach(inject(function($rootScope, $controller, $q) {
 		scope = $rootScope.$new();
 
@@ -20,10 +20,15 @@ describe('controllers/map', function() {
 			}
 		};
 
+		fakeMarkerSvc = {
+			createMarkers: function() {}
+		}
+
 		$controller('MapCtrl', {
 			$scope: scope,
 			geolocation: geolocation,
-			ngGPlacesAPI: googlePlaces
+			ngGPlacesAPI: googlePlaces,
+			MarkerSvc: fakeMarkerSvc
 		});
 	}));
 
@@ -85,6 +90,7 @@ describe('controllers/map', function() {
 	});
 
 	describe('when findBars', function() {
+		var expectedMarkers, expectedPlaces;
 		beforeEach(inject(function($rootScope) {
 			scope.map = {
 				center: {
@@ -100,17 +106,25 @@ describe('controllers/map', function() {
 				}]
 			};
 
-			spyOn(googlePlaces, 'nearbySearch').and.callThrough();
-			$rootScope.$broadcast('findBars');
+			expectedMarkers = [{
+				latitude: 12,
+				longitude: 23
+			}];
 
-			googlePlacesDeferred.resolve([{
+			expectedPlaces = [{
 				geometry: {
 					location: {
 						d: 4,
 						e: 5
 					}
 				}
-			}]);
+			}];
+
+			spyOn(googlePlaces, 'nearbySearch').and.callThrough();
+			spyOn(fakeMarkerSvc, 'createMarkers').and.returnValue(expectedMarkers);
+			$rootScope.$broadcast('findBars');
+
+			googlePlacesDeferred.resolve(expectedPlaces);
 			$rootScope.$digest();
 		}));
 
@@ -132,18 +146,13 @@ describe('controllers/map', function() {
 		});
 
 		it('should set new markers', function() {
-			expect(scope.map.markers).toContain({
-				latitude: 1,
-				longitude: 2
-			});
-			expect(scope.map.markers).toContain({
-				latitude: 4,
-				longitude: 5
-			});
+			expect(fakeMarkerSvc.createMarkers).toHaveBeenCalledWith(expectedPlaces);
+			expect(scope.map.markers).toContain(expectedMarkers[0]);
 		});
 	});
 
 	describe('when findAtm', function() {
+		var expectedMarkers, expectedPlaces;
 		beforeEach(inject(function($rootScope) {
 			scope.map = {
 				center: {
@@ -159,17 +168,25 @@ describe('controllers/map', function() {
 				}]
 			};
 
-			spyOn(googlePlaces, 'nearbySearch').and.callThrough();
-			$rootScope.$broadcast('findAtm');
-
-			googlePlacesDeferred.resolve([{
+			expectedPlaces = [{
 				geometry: {
 					location: {
 						d: 4,
 						e: 5
 					}
 				}
-			}]);
+			}];
+
+			expectedMarkers = [{
+				latitude: 12,
+				longitude: 23
+			}];
+
+			spyOn(googlePlaces, 'nearbySearch').and.callThrough();
+			spyOn(fakeMarkerSvc, 'createMarkers').and.returnValue(expectedMarkers);
+			$rootScope.$broadcast('findAtm');
+
+			googlePlacesDeferred.resolve(expectedPlaces);
 			$rootScope.$digest();
 		}));
 
@@ -190,14 +207,8 @@ describe('controllers/map', function() {
 		});
 
 		it('should set new markers', function() {
-			expect(scope.map.markers).toContain({
-				latitude: 1,
-				longitude: 2
-			});
-			expect(scope.map.markers).toContain({
-				latitude: 4,
-				longitude: 5
-			});
+			expect(fakeMarkerSvc.createMarkers).toHaveBeenCalledWith(expectedPlaces);
+			expect(scope.map.markers).toContain(expectedMarkers[0]);
 		});
 	});
 });
