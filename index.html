@@ -18,7 +18,7 @@
             <google-map center="map.center" zoom="map.zoom" draggable="true">
             <markers models="map.markers" coords="'self'" click="'markerSelected'">
                 <windows ng-controller="InfoWindowCtrl" show="'showInfoWindow'">
-                    <div>I'm an InfoWindow</div>
+                    <span ng-non-bindable>{{ name }}</span>
                 </windows>
             </markers>
         </google-map>

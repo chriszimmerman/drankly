@@ -9,10 +9,11 @@ describe('services/marker', function() {
 	})
 
 	describe('when createMarker', function() {
-		var result;
+		var result, place;
 
 		beforeEach(function() {
-			var place = {
+			place = {
+				name: 'name',
 				geometry: {
 					location: {
 						d: 2,
@@ -24,13 +25,18 @@ describe('services/marker', function() {
 			result = svc.createMarker(place);
 		})
 
-		it('should set longitude', function() {
-			expect(result.longitude).toEqual(1);
+		it('should set latitude', function() {
+			expect(result.latitude).toEqual(place.geometry.location.d);
 		})
 
-		it('should set latitude', function() {
-			expect(result.latitude).toEqual(2);
+		it('should set longitude', function() {
+			expect(result.longitude).toEqual(place.geometry.location.e);
 		})
+
+		it('should set name', function() {
+			expect(result.name).toEqual(place.name);
+		})
+
 	})
 
 	describe('when createMarkers', function() {
