@@ -1,22 +1,26 @@
-﻿<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Drankly</title>
-    <link href="app/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="app/css/app.css" rel="stylesheet" />
-</head>
-<body ng-app="drankly">
-    <div ng-controller="SearchCtrl">
-        <ul id="searchbar">
-            <li><a ng-click="reset()" href="#"><i class="fa fa-2x fa-refresh"></i></a></li>
-            <li><a ng-click="findBars()" href="#"><i class="fa fa-2x fa-glass"></i></a></li>
-            <li><a ng-click="findAtm()" href="#"><i class="fa fa-2x fa-dollar"></i></a></li>
-        </ul>
-    </div>
+﻿    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Drankly</title>
+        <link href="app/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="app/css/app.css" rel="stylesheet" />
+    </head>
+    <body ng-app="drankly">
+        <div ng-controller="SearchCtrl">
+            <ul id="searchbar">
+                <li><a ng-click="reset()" href="#"><i class="fa fa-2x fa-refresh"></i></a></li>
+                <li><a ng-click="findBars()" href="#"><i class="fa fa-2x fa-glass"></i></a></li>
+                <li><a ng-click="findAtm()" href="#"><i class="fa fa-2x fa-dollar"></i></a></li>
+            </ul>
+        </div>
 
-    <div ng-controller="MapCtrl" ng-init="setCenter()">
-        <google-map center="map.center" zoom="map.zoom" draggable="true">
-            <markers models="map.markers" coords="'self'"></markers>
+        <div ng-controller="MapCtrl" ng-init="setCenter()">
+            <google-map center="map.center" zoom="map.zoom" draggable="true">
+            <markers models="map.markers" coords="'self'" click="'markerSelected'">
+                <windows ng-controller="InfoWindowCtrl" show="'showInfoWindow'">
+                    <div>I'm an InfoWindow</div>
+                </windows>
+            </markers>
         </google-map>
     </div>
 
@@ -30,7 +34,7 @@
     <script src="app/js/app.js"></script>
     <script src="app/js/controllers/search.js"></script>
     <script src="app/js/controllers/map.js"></script>
+    <script src="app/js/controllers/infoWindow.js"></script>
     <script src="app/js/services/marker.js"></script>
-    <script src="app/js/services/infoWindow.js"></script>
 </body>
 </html>

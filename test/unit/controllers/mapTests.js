@@ -1,10 +1,11 @@
 describe('controllers/map', function() {
-	var scope, geolocation, googlePlaces, geolocationDeferred, googlePlacesDeferred, fakeMarkerSvc;
+	var scope, rootScope, geolocation, googlePlaces, geolocationDeferred, googlePlacesDeferred, fakeMarkerSvc;
 
 	beforeEach(module('drankly.controllers'));
 
 	beforeEach(inject(function($rootScope, $controller, $q) {
-		scope = $rootScope.$new();
+		rootScope = $rootScope;
+		scope = rootScope.$new();
 
 		geolocation = {
 			getLocation: function() {
@@ -26,6 +27,7 @@ describe('controllers/map', function() {
 
 		$controller('MapCtrl', {
 			$scope: scope,
+			$rootScope: rootScope,
 			geolocation: geolocation,
 			ngGPlacesAPI: googlePlaces,
 			MarkerSvc: fakeMarkerSvc
@@ -211,4 +213,15 @@ describe('controllers/map', function() {
 			expect(scope.map.markers).toContain(expectedMarkers[0]);
 		});
 	});
+
+	describe('when markerSelected', function() {
+		beforeEach(function() {
+			spyOn(rootScope, '$broadcast');
+			scope.markerSelected();
+		});
+
+		it('should broadcast markerSelected', function() {
+			expect(rootScope.$broadcast).toHaveBeenCalledWith('markerSelected');
+		})
+	})
 });

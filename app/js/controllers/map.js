@@ -26,6 +26,10 @@ angular.module('drankly.controllers')
 			});
 		};
 
+		$scope.markerSelected = function() {
+			$rootScope.$broadcast('markerSelected');
+		};
+
 		$rootScope.$on('reset', function() {
 			$scope.setCenter();
 		});
