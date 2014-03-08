@@ -15,6 +15,7 @@ describe('services/marker', function() {
 			place = {
 				name: 'name',
 				vicinity: 'address',
+				reference: 'reference',
 				geometry: {
 					location: {
 						d: 2,
@@ -40,6 +41,10 @@ describe('services/marker', function() {
 
 		it('should set vicinity', function() {
 			expect(result.vicinity).toEqual(place.vicinity);
+		})
+		
+		it('should set reference', function() {
+			expect(result.reference).toEqual(place.reference);
 		})
 	})
 

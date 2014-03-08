@@ -6,6 +6,7 @@ app.factory('MarkerSvc', function() {
 			return {
 				name: place.name,
 				vicinity: place.vicinity,
+				reference: place.reference,
 				latitude: place.geometry.location.d,
 				longitude: place.geometry.location.e
 			};
