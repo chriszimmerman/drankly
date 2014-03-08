@@ -14,6 +14,7 @@ describe('services/marker', function() {
 		beforeEach(function() {
 			place = {
 				name: 'name',
+				vicinity: 'address',
 				geometry: {
 					location: {
 						d: 2,
@@ -37,6 +38,9 @@ describe('services/marker', function() {
 			expect(result.name).toEqual(place.name);
 		})
 
+		it('should set vicinity', function() {
+			expect(result.vicinity).toEqual(place.vicinity);
+		})
 	})
 
 	describe('when createMarkers', function() {

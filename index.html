@@ -19,6 +19,7 @@
             <markers models="map.markers" coords="'self'" click="'markerSelected'">
                 <windows ng-controller="InfoWindowCtrl" show="'showInfoWindow'">
                     <span ng-non-bindable>{{ name }}</span>
+                    <address ng-non-bindable>{{ vicinity }}</address>
                 </windows>
             </markers>
         </google-map>
