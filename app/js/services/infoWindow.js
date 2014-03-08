@@ -8,7 +8,9 @@ app.factory('InfoWindowSvc', function() {
 					latitude: place.geometry.location.d,
 					longitude: place.geometry.location.e,
 				},
-				rating: place.rating
+				options: {
+					rating: place.rating
+				}
 			};
 		},
 		createInfoWindows: function(places) {

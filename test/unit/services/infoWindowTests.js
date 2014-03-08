@@ -35,7 +35,7 @@ describe('services/infoWindow', function() {
 
 
 		it('should set rating', function() {
-			expect(result.rating).toEqual(1);
+			expect(result.options.rating).toEqual(1);
 		})
 	})
 
