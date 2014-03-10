@@ -35,14 +35,6 @@ describe('services/marker', function() {
 			expect(result.longitude).toEqual(place.geometry.location.e);
 		})
 
-		it('should set name', function() {
-			expect(result.name).toEqual(place.name);
-		})
-
-		it('should set vicinity', function() {
-			expect(result.vicinity).toEqual(place.vicinity);
-		})
-		
 		it('should set reference', function() {
 			expect(result.reference).toEqual(place.reference);
 		})

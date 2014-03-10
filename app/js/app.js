@@ -11,6 +11,6 @@ var app = angular.module('drankly', [
 
 app.config(function(ngGPlacesAPIProvider) {
 	ngGPlacesAPIProvider.setDefaults({
-		nearbySearchKeys: ['geometry', 'name', 'vicinity', 'reference']
+		nearbySearchKeys: ['geometry', 'reference']
 	});
 });
