@@ -5,8 +5,8 @@ app.factory('MarkerSvc', function() {
 		createMarker: function(place) {
 			return {
 				reference: place.reference,
-				latitude: place.geometry.location.d,
-				longitude: place.geometry.location.e
+				latitude: place.geometry.location.k,
+				longitude: place.geometry.location.B
 			};
 		},
 

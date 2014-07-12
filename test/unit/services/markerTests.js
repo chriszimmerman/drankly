@@ -18,8 +18,8 @@ describe('services/marker', function() {
 				reference: 'reference',
 				geometry: {
 					location: {
-						d: 2,
-						e: 1
+						k: 2,
+						B: 1
 					}
 				}
 			};
@@ -28,11 +28,11 @@ describe('services/marker', function() {
 		})
 
 		it('should set latitude', function() {
-			expect(result.latitude).toEqual(place.geometry.location.d);
+			expect(result.latitude).toEqual(place.geometry.location.k);
 		})
 
 		it('should set longitude', function() {
-			expect(result.longitude).toEqual(place.geometry.location.e);
+			expect(result.longitude).toEqual(place.geometry.location.B);
 		})
 
 		it('should set reference', function() {
