@@ -1,4 +1,6 @@
-﻿body {
+﻿.nav, .pagination, .carousel, .panel-title, a { cursor: pointer; }
+
+body {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -36,4 +38,14 @@
 
 .angular-google-map-container {
     height: 100%;
+}
+
+#navbar > #user {
+    width:75px; 
+    height:75px; 
+    border-radius: 50%;
+}
+
+#map {
+    margin-top: 75px;
 }
