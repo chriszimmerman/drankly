@@ -10,4 +10,9 @@ angular.module('drankly.controllers').controller('SearchCtrl', function ($scope,
     $scope.reset = function () {
         $rootScope.$broadcast('reset');
     };
+
+    $scope.barsEnabled = false;
+    $rootScope.$on("barsEnabledChanged", function(state) {
+    	$scope.barsEnabled = state;
+    });
 });
