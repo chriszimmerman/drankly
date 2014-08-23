@@ -36,6 +36,22 @@ body {
         color: white;
     }
 
+#optionsbar {
+    position: absolute;
+    left:0px;
+    top:90px;
+    height:auto;
+    width:50px;
+    margin:15px 0;
+    padding:0;
+    background:#008299;
+    border-radius: 10px 0 0 10px;
+    list-style: none;
+    text-align: center;
+    box-shadow: black 0 0 5px 1px;
+    z-index: 1;
+}
+
 .angular-google-map-container {
     height: 100%;
 }
