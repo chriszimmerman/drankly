@@ -5,7 +5,13 @@ angular.module('drankly.controllers').controller('MapCtrl', function ($scope, $r
             longitude: 0
         },
         zoom: 0,
-        markers: []
+        markers: [],
+        options: {
+            zoomControl: false,
+            panControl: false,
+            streetViewControl: false,
+            mapTypeControl: false
+}
     };
 
     $scope.setCenter = function () {

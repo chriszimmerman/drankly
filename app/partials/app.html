@@ -9,7 +9,7 @@
     </ul>
 </div>
 <section id="map" ng-controller="MapCtrl" ng-init="setCenter()">
-    <google-map center="map.center" zoom="map.zoom" draggable="false">
+    <google-map center="map.center" zoom="map.zoom" draggable="false" options="map.options">
     <marker ng-repeat="marker in map.markers" coords="marker" click="'markerSelected'">
     <window isiconvisibleonclick="false">
     <h3>{{ marker.name }}</h3>

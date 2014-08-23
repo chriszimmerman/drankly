@@ -42,7 +42,13 @@ describe('controllers/map', function () {
                     latitude: 0
                 },
                 zoom: 0,
-                markers: []
+                markers: [],
+                options: {
+                    zoomControl: false,
+                    panControl: false,
+                    streetViewControl: false,
+                    mapTypeControl: false
+                }
             });
         });
     });
