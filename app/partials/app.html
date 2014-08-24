@@ -1,19 +1,17 @@
-<nav id="navbar" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<section id="searchbar" ng-controller="SearchCtrl">
     <img id="user" class="pull-right" src="{{ $parent.user.picture }}" alt="{{ $parent.user.name }}">
-</nav>
-<section ng-controller="SearchCtrl">
-    <ul id="searchbar">
-        <li><a ng-click="reset()"><i class="fa fa-2x fa-refresh"></i></a></li>
-        <li ng-show="barsEnabled"><a ng-click="findBars()"><i class="fa fa-2x fa-glass"></i></a></li>
-        <li><a ng-click="findAtm()"><i class="fa fa-2x fa-dollar"></i></a></li>
+    <ul>
+        <li><a ng-click="reset()" class="fa fa-2x fa-refresh"></a></li>
+        <li><a ng-click="findBars()" class="fa fa-2x fa-glass"></a></li>
+        <li><a ng-click="findAtm()" class="fa fa-2x fa-dollar"></a></li>
     </ul>
 </section>
 <section id="map" ng-controller="MapCtrl" ng-init="setCenter()">
     <google-map center="map.center" zoom="map.zoom" draggable="false" options="map.options">
-    <marker ng-repeat="marker in map.markers" coords="marker" click="'markerSelected'">
-    <window isiconvisibleonclick="false">
-    <h3>{{ marker.name }}</h3>
-    </window>
-    </marker>
+        <marker ng-repeat="marker in map.markers" idkey="marker" coords="marker" click="'markerSelected'">
+            <window isiconvisibleonclick="false">
+                <h3>{{ marker.name }}</h3>
+            </window>
+        </marker>
     </google-map>
 </section>

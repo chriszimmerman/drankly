@@ -1,4 +1,8 @@
-﻿.nav, .pagination, .carousel, .panel-title, a { cursor: pointer; }
+﻿.nav, .pagination, .carousel, .panel-title, a {
+    cursor: pointer;
+}
+
+a.fa { text-decoration: none;}
 
 body {
     margin: 0;
@@ -8,60 +12,36 @@ body {
     overflow: hidden;
 }
 
-#searchbar {
-    position: absolute;
-    right: 0px;
-    top: 90px;
-    height: auto;
-    width: 50px;
-    margin: 15px 0;
-    padding: 0;
-    background: #008299;
-    border-radius: 10px 0 0 10px;
-    list-style: none;
-    text-align: center;
-    box-shadow: black 0 0 5px 1px;
-    z-index: 1;
-}
-
-    #searchbar li {
-        padding: 12px;
-    }
-
-        #searchbar li:hover {
-            background-color:black;
-        }
-
-    #searchbar a {
-        color: white;
-    }
-
-#optionsbar {
-    position: absolute;
-    left:0px;
-    top:90px;
-    height:auto;
-    width:50px;
-    margin:15px 0;
-    padding:0;
-    background:#008299;
-    border-radius: 10px 0 0 10px;
-    list-style: none;
-    text-align: center;
-    box-shadow: black 0 0 5px 1px;
-    z-index: 1;
-}
-
 .angular-google-map-container {
     height: 100%;
 }
 
-#navbar > #user {
-    width:75px; 
-    height:75px; 
-    border-radius: 50%;
+#searchbar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: auto;
+    background: black;
+    text-align: center;
+    z-index: 1;
 }
 
-#map {
-    margin-top: 75px;
-}
+    #searchbar #user {
+        width:  100px;
+        height: 100px;
+        margin-bottom: 25px;
+    }
+
+    #searchbar ul {
+        list-style: none;
+        padding: 0;
+    }
+
+        #searchbar ul li {
+            margin: 15px 0;
+        }
+
+    #searchbar li:hover {
+        background-color: black;
+    }

@@ -11,7 +11,7 @@ var app = angular.module('drankly', [
     'drankly.services'
 ]);
 
-app.config(function($routeProvider, GooglePlusProvider, ngGPlacesAPIProvider) {
+app.config(function ($routeProvider, GooglePlusProvider, ngGPlacesAPIProvider) {
     GooglePlusProvider.init({
         clientId: '672033689369-vektsidribcffig4r9u2amf8qce67ecc'
     });
@@ -26,8 +26,8 @@ app.config(function($routeProvider, GooglePlusProvider, ngGPlacesAPIProvider) {
     ngGPlacesAPIProvider.setDefaults({
         nearbySearchKeys: ['name', 'geometry', 'reference']
     });
-}).run(function($rootScope, $location) {
-    $rootScope.$on("$routeChangeStart", function(event, next, current) {
+}).run(function ($rootScope, $location) {
+    $rootScope.$on("$routeChangeStart", function (event, next, current) {
         if ($rootScope.user == null)
             if (next.templateUrl != "partials/login.html")
                 $location.path("/login");
