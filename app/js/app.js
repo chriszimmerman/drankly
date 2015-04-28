@@ -13,7 +13,7 @@ var app = angular.module('drankly', [
 
 app.config(function ($routeProvider, GooglePlusProvider, ngGPlacesAPIProvider) {
     GooglePlusProvider.init({
-        clientId: '672033689369-vektsidribcffig4r9u2amf8qce67ecc'
+        clientId: '528011517824-nouds1g4onh0d9tv6c1ghh3n5elqhf1j'
     });
 
     $routeProvider.when("/", {
