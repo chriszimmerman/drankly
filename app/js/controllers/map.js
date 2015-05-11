@@ -43,7 +43,7 @@ angular.module('drankly.controllers').controller('MapCtrl', function ($scope, $r
         ngGPlacesAPI.nearbySearch({
             latitude: $scope.map.center.latitude,
             longitude: $scope.map.center.longitude,
-            radius: 1000,
+            radius: 3000,
             openNow: true,
             types: ['bar'],
         }).then(function (places) {
@@ -57,7 +57,7 @@ angular.module('drankly.controllers').controller('MapCtrl', function ($scope, $r
         ngGPlacesAPI.nearbySearch({
             latitude: $scope.map.center.latitude,
             longitude: $scope.map.center.longitude,
-            radius: 1000,
+            radius: 3000,
             types: ['atm'],
         }).then(function (places) {
             $scope.map.markers = MarkerSvc.createMarkers(places);
