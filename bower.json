@@ -1,16 +1,7 @@
 {
-  "name": "drankly",
-  "dependencies": {
-    "angular": "~1.2.22",
-    "angular-google-maps": "~1.2.0",
-    "angularjs-geolocation": "~0.1.1",
-    "angularjs-google-places": "~0.1.0",
-    "font-awesome": "~4.1.0",
-    "jasmine": "~2.0.1",
-    "angular-mocks": "~1.2.22",
-    "angular-route": "~1.2.22",
-    "underscore": "~1.6.0",
-    "angular-google-plus": "~0.1.2",
-    "bootstrap-css-only": "~3.2.0"
+  "name": "HelloIonic",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.1.1"
   }
 }
